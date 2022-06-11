@@ -12,7 +12,7 @@ export default class AddTagIdToCoursesTagsTable1654918123976
     await queryRunner.addColumn(
       'courses_tags',
       new TableColumn({
-        name: 'tagId',
+        name: 'tagsId',
         type: 'uuid',
         isPrimary: true,
       }),
@@ -22,7 +22,7 @@ export default class AddTagIdToCoursesTagsTable1654918123976
       'courses_tags',
       new TableForeignKey({
         name: 'FKTagsCoursesTags',
-        columnNames: ['tagId'],
+        columnNames: ['tagsId'],
 
         referencedTableName: 'tags',
         referencedColumnNames: ['id'],
@@ -35,6 +35,6 @@ export default class AddTagIdToCoursesTagsTable1654918123976
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('courses_tags', 'FKTagsCoursesTags');
-    await queryRunner.dropColumn('courses_tags', 'tagId');
+    await queryRunner.dropColumn('courses_tags', 'tagsId');
   }
 }

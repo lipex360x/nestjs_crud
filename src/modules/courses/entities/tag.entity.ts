@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
+  Entity,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -9,6 +10,7 @@ import {
 import { v4 as uuid } from 'uuid';
 import { Course } from './course.entity';
 
+@Entity('tags')
 export class Tag {
   constructor() {
     if (!this.id) this.id = uuid();

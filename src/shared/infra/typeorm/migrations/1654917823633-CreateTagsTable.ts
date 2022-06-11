@@ -15,7 +15,7 @@ export default class CreateTagsTable1654917823633
           },
 
           {
-            name: 'tag',
+            name: 'name',
             type: 'varchar',
           },
 

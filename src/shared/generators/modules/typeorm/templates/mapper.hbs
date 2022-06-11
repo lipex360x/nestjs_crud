@@ -1,0 +1,28 @@
+import { instanceToInstance } from 'class-transformer'
+
+import {{pascalCase entityName}} from '@modules/{{camelCase moduleName}}/infra/typeorm/entities/{{pascalCase entityName}}.entity'
+
+interface Response {
+  data: string
+  created_at: Date
+  updated_at: Date
+  deleted_at: Date
+}
+
+export default class {{pascalCase entityName}}Map {
+  static one ({ data }: {{pascalCase entityName}}): Response {
+    return instanceToInstance({ data })
+  }
+
+  static list ({{camelCase entityName}}: {{pascalCase entityName}}[]): Response[] {
+    const {{camelCase entityName}}List:Response[] = []
+
+    for (const {{camelCase entityName}} of {{camelCase entityName}}List) {
+      {{camelCase entityName}}List.push({
+        data: {{camelCase entityName}}.prop
+      })
+    }
+
+    return {{camelCase entityName}}List
+  }
+}

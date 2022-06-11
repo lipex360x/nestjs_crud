@@ -1,0 +1,43 @@
+import {{pascalCase schemaName}}, { {{pascalCase schemaName}}Attributes } from '@modules/{{camelCase moduleName}}/infra/mongoose/schemas/{{pascalCase schemaName}}.schema'
+import I{{pascalTableName}}, { CreateProps, FindByIdProps, UpdateProps, DeleteProps } from '@modules/{{camelCase moduleName}}/repositories/interfaces/I{{pascalTableName}}.interface'
+
+export default class Fake{{pascalCase schemaName}}Repository implements I{{pascalTableName}} {
+  private repository: {{pascalCase schemaName}}Attributes[] = []
+
+  async create ({ content }: CreateProps): Promise<{{pascalCase schemaName}}Attributes> {
+    const {{camelCase moduleName}} = new {{pascalCase schemaName}}()
+
+    Object.assign({{camelCase moduleName}}, {
+      ...{{camelCase moduleName}},
+      content
+    })
+
+    this.repository.push({{camelCase moduleName}})
+
+    return {{camelCase moduleName}}
+  }
+
+  async findAll (): Promise<{{pascalCase schemaName}}Attributes[]> {
+    return this.repository
+  }
+
+  async findById ({ id }: FindByIdProps): Promise<{{pascalCase schemaName}}Attributes> {
+    return this.repository.find({{camelCase moduleName}} => {{camelCase moduleName}}._id === id)
+  }
+
+  async update ({ {{camelCase moduleName}} }: UpdateProps): Promise<{{pascalCase schemaName}}Attributes> {
+    const getIndex = this.repository.findIndex(get{{pascalCase schemaName}} => get{{pascalCase schemaName}}._id === {{camelCase moduleName}}._id)
+
+    this.repository[getIndex] = {{camelCase moduleName}}
+
+    return {{camelCase moduleName}}
+  }
+
+  async delete ({ id }: DeleteProps): Promise<{{pascalCase schemaName}}Attributes> {
+    const {{camelCase moduleName}} = this.repository.find(repo => repo._id === id)
+
+    this.repository = this.repository.filter(repo => repo._id !== id)
+
+    return {{camelCase moduleName}}
+  }
+}

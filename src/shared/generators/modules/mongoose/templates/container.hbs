@@ -1,0 +1,11 @@
+import { container } from 'tsyringe'
+
+import I{{pascalTableName}} from '@modules/{{camelCase moduleName}}/repositories/interfaces/I{{pascalTableName}}.interface'
+import {{pascalTableName}}Repository from '@modules/{{camelCase moduleName}}/infra/mongoose/repositories/{{pascalTableName}}.repository'
+
+container.registerSingleton<I{{pascalTableName}}>(
+  '{{pascalTableName}}Repository',
+  {{pascalTableName}}Repository
+)
+
+export default container

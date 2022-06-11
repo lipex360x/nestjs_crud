@@ -1,0 +1,46 @@
+import { Repository, getRepository } from 'typeorm'
+
+import {{pascalCase entityName}} from '@modules/{{camelCase moduleName}}/infra/typeorm/entities/{{pascalCase entityName}}.entity'
+import I{{pascalTableName}}, { CreateProps, FindByIdProps, UpdateProps, DeleteProps } from '@modules/{{camelCase moduleName}}/repositories/interfaces/I{{pascalTableName}}.interface'
+
+export default class {{pascalTableName}}Repository implements I{{pascalTableName}} {
+  private repository: Repository<{{pascalCase entityName}}>
+
+  constructor () {
+    this.repository = getRepository({{pascalCase entityName}})
+  }
+
+  async create ({ data }: CreateProps): Promise<{{pascalCase entityName}}> {
+    const {{camelCase entityName}} = this.repository.create({ data })
+
+    await this.repository.save({{camelCase entityName}})
+
+    return {{camelCase entityName}}
+  }
+
+  async findById ({ id }: FindByIdProps): Promise<{{pascalCase entityName}}> {
+    return this.repository.findOne({ id })
+  }
+
+  async findAll (): Promise<{{pascalCase entityName}}[]> {
+    return this.repository.find()
+  }
+
+  async update ({ {{camelCase entityName}} }: UpdateProps): Promise<{{pascalCase entityName}}> {
+    let find{{pascalCase entityName}} = await this.repository.findOne({{camelCase entityName}}.id)
+
+    find{{pascalCase entityName}} = { ...{{camelCase entityName}} } as {{pascalCase entityName}}
+
+    await this.repository.save(find{{pascalCase entityName}})
+
+    return find{{pascalCase entityName}}
+  }
+
+  async delete ({ id }: DeleteProps): Promise<{{pascalCase entityName}}> {
+    const {{camelCase entityName}} = await this.repository.findOne({ id })
+
+    await this.repository.delete(id)
+
+    return {{camelCase entityName}} 
+  }
+}

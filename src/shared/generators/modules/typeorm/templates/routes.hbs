@@ -1,0 +1,11 @@
+import { Router } from 'express'
+
+import {{pascalCase useCaseName}}{{pascalCase actionName}}Controller from '@modules/{{camelCase moduleName}}/useCases/{{pascalCase useCaseName}}/{{pascalCase actionName}}/{{pascalCase useCaseName}}{{pascalCase actionName}}.controller'
+
+const router = Router()
+
+const {{camelCase useCaseName}}{{pascalCase actionName}}Controller = new {{pascalCase useCaseName}}{{pascalCase actionName}}Controller()
+
+router.post('/', {{camelCase useCaseName}}{{pascalCase actionName}}Controller.handle)
+
+export default router

@@ -1,0 +1,28 @@
+import { inject, injectable } from 'tsyringe'
+import AppError from '@shared/errors/AppError'
+
+import {{pascalCase entityName}} from '@modules/{{camelCase moduleName}}/infra/typeorm/entities/{{pascalCase entityName}}.entity'
+
+import I{{pascalTableName}} from '@modules/{{camelCase moduleName}}/repositories/interfaces/I{{pascalTableName}}.interface'
+import {{pascalCase entityName}}Map from '@modules/{{camelCase moduleName}}/mapper/{{pascalCase entityName}}.map'
+
+interface Request {
+  data: string
+}
+
+@injectable()
+export default class {{pascalCase useCaseName}}{{pascalCase actionName}}Service {
+  constructor (
+    @inject('{{pascalTableName}}Repository')
+    private repository: I{{pascalTableName}}
+  ) {}
+
+  async execute ({ data }: Request): Promise<{{pascalCase entityName}}Map> {
+    // To Do
+
+    // if (!true) throw new AppError('XXX Message Error XXX')
+
+    // return {{pascalCase entityName}}Map.one({ })
+    // return {{pascalCase entityName}}Map.list() as {{pascalCase entityName}}[]
+  }
+}

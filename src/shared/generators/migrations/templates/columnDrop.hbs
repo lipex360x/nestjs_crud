@@ -1,0 +1,15 @@
+import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm'
+
+export default class {{pascalCase name}}{{timestamp}} implements MigrationInterface {
+  public async up (queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropColumn('{{tableName}}', '{{columnName}}')
+  }
+
+  public async down (queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.addColumn('{{tableName}}', new TableColumn({
+      name: '{{columnName}}',
+      type: '{{columnType}}'
+    })
+    )
+  }
+}

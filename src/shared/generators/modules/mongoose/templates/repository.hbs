@@ -1,0 +1,27 @@
+import {{pascalCase schemaName}}, { {{pascalCase schemaName}}Attributes } from '@modules/{{camelCase moduleName}}/infra/mongoose/schemas/{{pascalCase schemaName}}.schema'
+import I{{pascalTableName}}, { CreateProps, FindByIdProps, UpdateProps, DeleteProps } from '@modules/{{camelCase moduleName}}/repositories/interfaces/I{{pascalTableName}}.interface'
+
+export default class {{pascalCase schemaName}}Repository implements I{{pascalTableName}} {
+  async create ({ content }: CreateProps): Promise<{{pascalCase schemaName}}Attributes> {
+    return {{pascalCase schemaName}}.create({
+      content
+    })
+  }
+
+  async findAll (): Promise<{{pascalCase schemaName}}Attributes[]> {
+    return {{pascalCase schemaName}}.find()
+  }
+
+  async findById ({ id }: FindByIdProps): Promise<{{pascalCase schemaName}}Attributes> {
+    return {{pascalCase schemaName}}.findOne({ _id: { $ne: id } })
+  }
+
+  async update ({ {{camelCase moduleName}} }: UpdateProps): Promise<{{pascalCase schemaName}}Attributes> {
+    const id = {{camelCase moduleName}}._id
+    return {{pascalCase schemaName}}.findByIdAndUpdate(id, {{camelCase moduleName}}, { new: true })
+  }
+
+  async delete ({ id }: DeleteProps): Promise<{{pascalCase schemaName}}Attributes> {
+    return {{pascalCase schemaName}}.findByIdAndDelete(id)
+  }
+}

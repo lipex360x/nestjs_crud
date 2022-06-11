@@ -1,0 +1,25 @@
+import { {{pascalCase schemaName}}Attributes } from '@modules/{{camelCase moduleName}}/infra/mongoose/schemas/{{pascalCase schemaName}}.schema'
+
+export interface CreateProps {
+  content: string
+}
+
+export interface FindByIdProps {
+  id: any
+}
+
+export interface UpdateProps {
+  {{camelCase moduleName}}: {{pascalCase schemaName}}Attributes
+}
+
+export interface DeleteProps {
+  id: any
+}
+
+export default interface INotitications {
+  create(data: CreateProps): Promise<{{pascalCase schemaName}}Attributes>
+  findAll(): Promise<{{pascalCase schemaName}}Attributes[]>
+  findById(data: FindByIdProps): Promise<{{pascalCase schemaName}}Attributes>
+  update(data: UpdateProps): Promise<{{pascalCase schemaName}}Attributes>
+  delete(data: DeleteProps): Promise<{{pascalCase schemaName}}Attributes>
+}

@@ -1,0 +1,49 @@
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm'
+
+export default class {{pascalCase name}}{{timestamp}} implements MigrationInterface {
+  public async up (queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: '{{tableName}}',
+        columns: [
+          {
+            name: '{{columnName}}',
+            type: 'uuid'
+          },
+
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
+          },
+
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
+          }
+
+        ]
+      })
+    )
+
+    await queryRunner.createForeignKey(
+      '{{tableName}}',
+      new TableForeignKey({
+        name: 'FK{{pascalCase tableReference}}{{pascalCase tableName}}',
+        columnNames: ['{{columnName}}'],
+
+        referencedTableName: '{{tableReference}}',
+        referencedColumnNames: ['{{tableColumnReference}}'],
+
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL'
+      })
+    )
+  }
+
+  public async down (queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('{{tableName}}', 'FK{{pascalCase tableReference}}{{pascalCase tableName}}')
+    await queryRunner.dropTable('{{tableName}}')
+  }
+}

@@ -1,0 +1,25 @@
+import {{pascalCase entityName}} from '@modules/{{camelCase moduleName}}/infra/typeorm/entities/{{pascalCase entityName}}.entity'
+
+export interface CreateProps {
+  data: string
+}
+
+export interface FindByIdProps {
+  id: string
+}
+
+export interface UpdateProps {
+  {{camelCase entityName}}: {{pascalCase entityName}}
+}
+
+export interface DeleteProps {
+  id: string
+}
+
+export default interface I{{pascalTableName}} {
+  create(data: CreateProps): Promise<{{pascalCase entityName}}>
+  findById(data: FindByIdProps): Promise<{{pascalCase entityName}}>
+  findAll(): Promise<{{pascalCase entityName}}[]>
+  update(data: UpdateProps): Promise<{{pascalCase entityName}}>
+  delete(data: DeleteProps): Promise<{{pascalCase entityName}}>
+}

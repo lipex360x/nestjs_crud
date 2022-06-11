@@ -9,7 +9,7 @@ module.exports = {
       message: 'Migration Type',
       choices: () => [
         { name: 'New Table', value: 'tableCreate' },
-        { name: 'New FK Table (ManyToMany)', value: 'tableFkCreate' },
+        { name: 'New FK Table (Create Table N:N)', value: 'tableFkCreate' },
         { name: 'Add Column', value: 'columnAdd' },
         { name: 'Add FK Column', value: 'columnFkAdd' },
         { name: 'Drop Column', value: 'columnDrop' },

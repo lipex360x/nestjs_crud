@@ -1,19 +1,15 @@
-import { v4 as uuid } from 'uuid';
-
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
-  Entity,
-  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Tag } from './tag.entity';
+import { v4 as uuid } from 'uuid';
+import { Course } from './course.entity';
 
-@Entity('courses')
-export class Course {
+export class Tag {
   constructor() {
     if (!this.id) this.id = uuid();
   }
@@ -24,12 +20,8 @@ export class Course {
   @Column()
   name: string;
 
-  @Column()
-  description: string;
-
-  @JoinTable({ name: 'courses_tag' })
-  @ManyToMany(() => Tag, (tag) => tag.courses)
-  tags: Tag[];
+  @ManyToMany(() => Course, (course) => course.tags)
+  courses: Course[];
 
   @CreateDateColumn()
   created_at: Date;

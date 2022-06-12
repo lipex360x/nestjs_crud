@@ -8,14 +8,15 @@ implements MigrationInterface {
       new TableColumn({
         name: '{{columnName}}',
         type: 'uuid',
-        isPrimary: true
+        generationStrategy: 'uuid',
+        default: 'uuid_generate_v4()',
       })
     )
 
     await queryRunner.createForeignKey(
       '{{tableName}}',
       new TableForeignKey({
-        name: 'FK{{pascalCase tableReference}}{{pascalCase tableName}}',
+        name: {{tableName}}_{{tableReference}}',
         columnNames: ['{{columnName}}'],
 
         referencedTableName: '{{tableReference}}',
@@ -28,7 +29,7 @@ implements MigrationInterface {
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('{{tableName}}', 'FK{{pascalCase tableReference}}{{pascalCase tableName}}')
+    await queryRunner.dropForeignKey('{{tableName}}', '{{tableName}}_{{tableReference}}')
     await queryRunner.dropColumn('{{tableName}}', '{{columnName}}')
   }
 }

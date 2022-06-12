@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class AddCourseIdToCoursesTagsTable1654920860112
+export class AddCoursesIdToCoursesTagsTable1629406086494
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -14,27 +14,24 @@ export default class AddCourseIdToCoursesTagsTable1654920860112
       new TableColumn({
         name: 'coursesId',
         type: 'uuid',
-        isPrimary: true,
+        isNullable: true,
       }),
     );
 
     await queryRunner.createForeignKey(
       'courses_tags',
       new TableForeignKey({
-        name: 'FKCoursesCoursesTags',
+        name: 'courses_tags_courses',
         columnNames: ['coursesId'],
-
-        referencedTableName: 'courses',
         referencedColumnNames: ['id'],
-
-        onDelete: 'SET NULL',
-        onUpdate: 'SET NULL',
+        referencedTableName: 'courses',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('courses_tags', 'FKCoursesCoursesTags');
+    await queryRunner.dropForeignKey('courses_tags', 'courses_tags_courses');
+
     await queryRunner.dropColumn('courses_tags', 'coursesId');
   }
 }

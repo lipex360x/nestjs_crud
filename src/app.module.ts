@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoursesModule } from './modules/courses/courses.module';
+import { VersionsModule } from './modules/versions/versions.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CoursesModule } from './modules/courses/courses.module';
       synchronize: false,
     }),
     CoursesModule,
+    VersionsModule,
   ],
   controllers: [],
   providers: [],
